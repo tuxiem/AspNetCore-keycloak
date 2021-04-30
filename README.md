@@ -1,7 +1,7 @@
 # ASP.NET Core - Keycloak authorization guide
 
 ## Introduction
-This repo is for anyone interrested in adding keycloak authorization to an ASP.NET Core app.  
+This repo is for anyone interrested in adding Keycloak authorization to an ASP.NET Core app with OIDC.  
 I had troubles finding resources about the subject for ASP.NET Core and got quite a lot of grey hair in the process.  
 I ended up cracking the issue and created this solution and guide to help anyone having the same problem.  
 Feel free to edit the code, by submitting a PR.  
@@ -41,6 +41,10 @@ In order to get authorization to work with Keycloak, you will need to add a new 
 10. Add to access token must be on
 
 ![Keycloak Client Scope](/images/Keycloak_2.png)
+
+## Login/Logout
+I needed a silent authorization, there is no login or logout function built in.  
+You can probably find other examples on github, where they do this.  
 
 ## Docker
 In the repo, there is a dockerfile that can be used to build an image.  
