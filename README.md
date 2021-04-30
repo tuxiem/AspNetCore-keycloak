@@ -1,7 +1,7 @@
 # ASP.NET Core - Keycloak authorization guide
 
 ## Introduction
-This repo is for anyone interrested in adding keycloak authorization to a C# app.  
+This repo is for anyone interrested in adding keycloak authorization to an ASP.NET Core app.  
 I had troubles finding resources about the subject for ASP.NET Core and got quite a lot of grey hair in the process.  
 I ended up cracking the issue and created this solution and guide to help anyone having the same problem.  
 Feel free to edit the code, by submitting a PR.  
