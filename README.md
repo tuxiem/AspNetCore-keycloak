@@ -18,8 +18,8 @@ Name | Example Value | Docker env name
 ------------ | ------------- | -------------
 ServerRealm | https://keycloak.example.com/auth/realms/keycloak-realm" | Keycloak__ServerRealm
 Metadata | "https://keycloak.example.com/auth/realms/keycloak-realm/.well-known/openid-configuration" | Keycloak__Metadata
-ClientId | ![Keycloak Role](/images/Keycloak_1.png) | Keycloak__ClientId
-ClientSecret | ![Keycloak Role](/images/Keycloak_3.png) | Keycloak__ClientSecret
+ClientId | ![Keycloak ClientId](/images/Keycloak_1.png) | Keycloak__ClientId
+ClientSecret | ![Keycloak ClientSecret](/images/Keycloak_3.png) | Keycloak__ClientSecret
 
 ## Policy vs. Roles
 The code uses a policy example, but also comments on how to use roles within the code.  
@@ -40,7 +40,7 @@ In order to get authorization to work with Keycloak, you will need to add a new 
 9. Token claim name must be "role"
 10. Add to access token must be on
 
-![Keycloak Role](/images/Keycloak_2.png)
+![Keycloak Client Scope](/images/Keycloak_2.png)
 
 ## Docker
 In the repo, there is a dockerfile that can be used to build an image.  
@@ -55,11 +55,11 @@ Docker run -it --rm -p 5001:5001 keycloakauth
 ## Errors
 Keycloak tells you "invalid redirect uri" - you need to add your apps uri ex: https://localhost:44556 to the valid redirect URIs and web origins.
 
-![Keycloak Role](/images/Keycloak_5.png)
+![Keycloak URI](/images/Keycloak_5.png)
 
 You are presented with the access denied page.  
 Copy your access token from the HomeController to jwt.io and look for what claims you have.  
 They need to match the role names configured in Keycloak and in the policy.  
 If you use Active Directory, sometimes the sync is very slow, renew your kerberos token and restart Keycloak or force a sync.  
 
-![Keycloak Role](/images/Keycloak_4.png)
+![Keycloak Roles](/images/Keycloak_4.png)
