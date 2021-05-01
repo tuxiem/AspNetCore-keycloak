@@ -41,7 +41,7 @@ namespace KeycloakAuth.Controllers
          * If nothing works, try to test just with [Authorize] to see that you can get a token from your keycloak
          */
 
-        [Authorize(Policy = "admin")]
+        [Authorize(Policy = "admins")]
         public IActionResult AuthenticationAdmin()
         {
             return View();
