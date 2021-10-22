@@ -12,6 +12,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.AspNetCore.Rewrite;
 using Microsoft.AspNetCore.HttpOverrides;
+using KeycloakAuth.MultiTenants;
+using Microsoft.Extensions.Options;
 
 namespace KeycloakAuth
 {
@@ -29,7 +31,7 @@ namespace KeycloakAuth
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
-            
+
             services.AddAuthentication(options =>
             {
                 //Sets cookie authentication scheme
@@ -37,7 +39,6 @@ namespace KeycloakAuth
                 options.DefaultSignInScheme = CookieAuthenticationDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
             })
-
             .AddCookie(cookie =>
             {
                 //Sets the cookie name and maxage, so the cookie is invalidated.
@@ -45,9 +46,13 @@ namespace KeycloakAuth
                 cookie.Cookie.MaxAge = TimeSpan.FromMinutes(60);
                 cookie.Cookie.SecurePolicy = CookieSecurePolicy.SameAsRequest;
                 cookie.SlidingExpiration = true;
-            })
-            .AddOpenIdConnect(options =>
+            });
+
+            if (!bool.Parse(Configuration.GetSection("Keycloak")["IsMultiTenants"]))
             {
+                services.AddAuthentication()
+                .AddOpenIdConnect(options =>
+                {
                 /*
                  * ASP.NET core uses the http://*:5000 and https://*:5001 ports for default communication with the OIDC middleware
                  * The app requires load balancing services to work with :80 or :443
@@ -69,26 +74,34 @@ namespace KeycloakAuth
                 options.MetadataAddress = Configuration.GetSection("Keycloak")["Metadata"];
                 //Require keycloak to use SSL
                 options.RequireHttpsMetadata = true;
-                options.GetClaimsFromUserInfoEndpoint = true;
-                options.Scope.Add("openid");
-                options.Scope.Add("profile");
+                    options.GetClaimsFromUserInfoEndpoint = true;
+                    options.Scope.Add("openid");
+                    options.Scope.Add("profile");
                 //Save the token
                 options.SaveTokens = true;
                 //Token response type, will sometimes need to be changed to IdToken, depending on config.
                 options.ResponseType = OpenIdConnectResponseType.Code;
                 //SameSite is needed for Chrome/Firefox, as they will give http error 500 back, if not set to unspecified.
                 options.NonceCookie.SameSite = SameSiteMode.Unspecified;
-                options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
-                
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    NameClaimType = "name",
-                    RoleClaimType = ClaimTypes.Role,
-                    ValidateIssuer = true
-                };
+                    options.CorrelationCookie.SameSite = SameSiteMode.Unspecified;
 
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        NameClaimType = "name",
+                        RoleClaimType = ClaimTypes.Role,
+                        ValidateIssuer = true
+                    };
+                });
+            }
+            else
+            {
+                services.AddAuthentication()
+                .AddOpenIdConnect();
 
-            });
+                services.AddSingleton<TenantProvider>();
+                services.AddSingleton<IOptionsMonitor<OpenIdConnectOptions>, OpenIdConnectOptionsProvider>();
+                services.AddSingleton<IConfigureOptions<OpenIdConnectOptions>, OpenIdConnectOptionsInitializer>();
+            }
 
             /*
              * For roles, that are defined in the keycloak, you need to use ClaimTypes.Role

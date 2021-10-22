@@ -16,4 +16,10 @@
 
 
 
+  <ItemGroup>
+    <None Remove="MultiTenants\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="MultiTenants\" />
+  </ItemGroup>
 </Project>

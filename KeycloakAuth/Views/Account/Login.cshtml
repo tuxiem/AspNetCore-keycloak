@@ -1,0 +1,17 @@
+﻿@{
+    ViewData["Title"] = "Login";
+}
+<form method="post" enctype="multipart/form-data" asp-controller="Account" asp-action="Login">
+    <table>
+        <tr>
+            <td>User Name: </td>
+            <td><input type="text" id="txtFirstName" name="UserName" /></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" value="Submit" /></td>
+        </tr>
+    </table>
+    <hr />
+    @ViewBag.Name
+</form>
