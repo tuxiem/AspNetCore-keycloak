@@ -8,7 +8,7 @@ Feel free to edit the code, by submitting a PR.
 May the code be with you :relaxed:  
 
 ## Start
-Clone the repo and choose if you want the dotnet 3 or dotnet 6 projekt, then open KeycloakAuth.sln in Visual Studio or VS Code.  
+Clone the repo and choose if you want the dotnet 3 or dotnet 6 project, then open KeycloakAuth.sln in Visual Studio or VS Code.  
 
 ## Appsettings.json
 In order to get the application to work, you need to configure the application.json with the appropriate Keycloak metadata from your environment.  
