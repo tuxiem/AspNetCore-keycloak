@@ -1,0 +1,24 @@
+﻿
+@{
+    ViewData["Title"] = "Authentication";
+}
+
+<h1>Authentication</h1>
+<body>
+    Test auth works for members in users...
+    @if (User.Identity.IsAuthenticated)
+    {
+        //Display name
+        @User.Identity.Name
+
+    <dl>
+        @foreach (var claim in User.Claims)
+        {
+            <dt>@claim.Type</dt>
+            <dd>@claim.Value</dd>
+        }
+
+    </dl>
+        }
+</body>
+
