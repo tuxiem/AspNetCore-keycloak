@@ -91,5 +91,5 @@ If you use Active Directory, sometimes the sync is very slow, renew your kerbero
 
 You are not granted an exchange token for your service.  
 Insert a breakpoint in the TokenExchange.cs file, where the access token is returned and verify the claims are correct by validating the token in jwt.io.  
-You should see, that the claims and settings belong to the exchaned client.  
+You should see, that the claims and settings belong to the exchanged client.  
 If this is correct, validate the settings in Keycloak are correct, and that the service has permissions to exchange a token on service X.  
