@@ -47,7 +47,7 @@ I needed a silent authorization, there is no login or logout function built in.
 You can probably find other examples on github, where they do this.  
 
 ## Token exchange
-In order to do token exchange with a keycloak client to a keycloak client, you will need to add a middleware handling the exchange token creation.  
+There is a token exchange example in KeycloakAuthDotNet6 that needs to be uncommented in the HomeController, it implements middleware handling the exchange token and refresh token creation.  
 Official documentation on token exchange: https://www.keycloak.org/docs/latest/securing_apps/#_token-exchange  
 The appsettings needs to be updated with the Audience and token exchange point.
 Name | Example Value | Docker env name
@@ -60,7 +60,6 @@ Depending on your token lifetime settings, it might be a good idea to do a refre
 2. Use the refresh token, to get a new access token
 3. Use the new access token, to do a token exchange on the audience connected to the other keycloak client
 Remember to grant the nessesary roles and permissions on both clients.  
-The token exchange is only available in the dotnet 6 example of the code.  
 
 ## Dotnet 6
 In order to see tokens/claims in dotnet 6, you will have to install the package Microsoft.IdentityModel.Tokens.Jwt.  
