@@ -62,7 +62,7 @@ Depending on your token lifetime settings, it might be a good idea to do a refre
 Remember to grant the nessesary roles and permissions on both clients.  
 
 ## Dotnet 6
-In order to see tokens/claims in dotnet 6, you will have to install the package Microsoft.IdentityModel.Tokens.Jwt.  
+In order to see tokens/claims in dotnet 6, you will have to install the package `System.IdentityModel.Tokens.Jwt`.  
 For some reason, it's not updated in the authentication dependency.  
 
 ## Docker
