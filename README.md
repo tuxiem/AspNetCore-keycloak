@@ -76,11 +76,13 @@ Docker build . -t keycloakauth
 Docker run -it --rm -p 5001:5001 keycloakauth
 ```
 
-## Errors
+## Troubleshooting
+### Invalid redirect URI
 Keycloak tells you "invalid redirect uri" - you need to add your apps uri ex: https://localhost:44556 to the valid redirect URIs and web origins.
 
 ![Keycloak URI](/images/Keycloak_5.png)
 
+### Access denied
 You are presented with the access denied page.  
 Copy your access token from the HomeController to jwt.io and look for what claims you have.  
 They need to match the role names configured in Keycloak and in the policy.  
@@ -88,6 +90,7 @@ If you use Active Directory, sometimes the sync is very slow, renew your kerbero
 
 ![Keycloak Roles](/images/Keycloak_4.png)
 
+### Token exchange failing
 You are not granted an exchange token for your service.  
 Insert a breakpoint in the TokenExchange.cs file, where the access token is returned and verify the claims are correct by validating the token in jwt.io.  
 You should see, that the claims and settings belong to the exchanged client.  
