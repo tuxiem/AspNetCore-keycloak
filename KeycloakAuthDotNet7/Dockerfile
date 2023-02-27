@@ -1,5 +1,5 @@
 # use alpine for smaller footprint
-FROM mcr.microsoft.com/dotnet/aspnet:6.0-alpine AS base
+FROM mcr.microsoft.com/dotnet/aspnet:7.0-alpine AS base
 
 # Environment variables are exposed automatic in application.json
 # Keycloak__Metadata
@@ -15,7 +15,7 @@ ENV ASPNETCORE_URLS=http://+:5001
 # EXPOSE 5000 - for http only
 EXPOSE 5001
 
-FROM mcr.microsoft.com/dotnet/sdk:6.0-alpine AS build
+FROM mcr.microsoft.com/dotnet/sdk:7.0-alpine AS build
 
 WORKDIR /src
 COPY ["/KeycloakAuth/KeycloakAuth.csproj", "KeycloakAuth/"]

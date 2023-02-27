@@ -1,6 +1,9 @@
 .vs
 .history
+.vscode
 /KeycloakAuthDotNet3/KeycloakAuth/obj
 /KeycloakAuthDotNet3/KeycloakAuth/bin
 /KeycloakAuthDotNet6/KeycloakAuth/obj
 /KeycloakAuthDotNet6/KeycloakAuth/bin
+/KeycloakAuthDotNet7/KeycloakAuth/obj
+/KeycloakAuthDotNet7/KeycloakAuth/bin
