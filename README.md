@@ -31,14 +31,15 @@ Use whatever suit your needs, the examples should be there.
 In order to get authorization to work with Keycloak, you will need to add a new role to Client Scopes.  
 1. Login to Keycloak Admin page
 2. Goto Client Scopes
-3. Goto Roles
+3. Goto 'roles' entry
 4. Goto Mappers
-5. Click Create
+5. Click Add mapper -> By configuration -> User Client Role
 6. Give the new role a name
-7. Mapper Type = User Client Role
-8. Multivated must be on
-9. Token claim name must be "role"
-10. Add to access token must be on
+7. Multivated must be on
+8. Token claim name must be 'role'
+9. Add to access token must be on
+
+User roles : To test the application Authentication policy options, at least one user will need to have the role 'admin'.
 
 ![Keycloak Client Scope](/images/Keycloak_2.png)
 

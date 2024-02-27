@@ -1,0 +1,33 @@
+﻿
+@{
+    ViewData["Title"] = "Authentication";
+}
+
+<h1>Authentication</h1>
+<body>
+    Test auth for admin group works ...
+    @if (User.Identity.IsAuthenticated)
+    {
+        //Display name
+        @User.Identity.Name
+
+    <dl>
+        @foreach (var claim in User.Claims)
+        {
+            <dt>@claim.Type</dt>
+            <dd>@claim.Value</dd>
+        }
+
+    </dl>
+    <h4>User Roles</h4>
+    <dl>
+        @using System.Security.Claims;
+        @foreach (var roleClaim in User.FindAll(ClaimTypes.Role))
+        {
+            <dd>@roleClaim.Value</dd>
+        }
+
+    </dl>
+    }
+</body>
+

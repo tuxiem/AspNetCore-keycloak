@@ -1,0 +1,16 @@
+﻿
+@{
+    ViewData["Title"] = "Authentication";
+}
+
+<h1>Authentication</h1>
+<body>
+    Test auth - you have done something wrong if you can access this site.
+    @if (User.Identity.IsAuthenticated)
+    {
+        //Display name
+        @User.Identity.Name
+
+        }
+</body>
+
